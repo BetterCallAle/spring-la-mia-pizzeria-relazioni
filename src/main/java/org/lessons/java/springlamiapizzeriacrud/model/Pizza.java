@@ -43,6 +43,10 @@ public class Pizza {
         return price;
     }
 
+    public List<SpecialOffer> getSpecialOffers() {
+        return specialOffers;
+    }
+
     //SETTERS
     public void setName(String name) {
         this.name = name;
@@ -58,5 +62,9 @@ public class Pizza {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+        this.specialOffers = specialOffers;
     }
 }
