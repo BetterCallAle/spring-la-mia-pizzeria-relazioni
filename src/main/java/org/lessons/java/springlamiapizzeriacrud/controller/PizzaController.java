@@ -93,7 +93,6 @@ public class PizzaController {
         }
         redirectAttributes.addFlashAttribute("success", "La pizza " + pizza.getName() + " è stata aggiornata");
         pizzaRepo.save(pizza);
-
         return "redirect:/pizzas";
     }
 
