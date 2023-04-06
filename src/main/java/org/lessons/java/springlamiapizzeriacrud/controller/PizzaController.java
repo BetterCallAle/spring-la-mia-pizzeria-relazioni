@@ -1,7 +1,9 @@
 package org.lessons.java.springlamiapizzeriacrud.controller;
 
 import jakarta.validation.Valid;
+import org.lessons.java.springlamiapizzeriacrud.model.Ingredient;
 import org.lessons.java.springlamiapizzeriacrud.model.Pizza;
+import org.lessons.java.springlamiapizzeriacrud.repository.IngredientRepository;
 import org.lessons.java.springlamiapizzeriacrud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,9 @@ import java.util.Optional;
 public class PizzaController {
     @Autowired
     private PizzaRepository pizzaRepo;
+
+    @Autowired
+    private IngredientRepository ingredientRepo;
 
     //INDEX
     @GetMapping
@@ -61,7 +66,9 @@ public class PizzaController {
     //CREATE
     @GetMapping("/create")
     public String create(Model model){
+        List<Ingredient> ingredients = ingredientRepo.findAll();
         model.addAttribute("pizza" , new Pizza());
+        model.addAttribute("ingredients", ingredients);
         return "/pizzas/create";
     }
 
@@ -80,7 +87,9 @@ public class PizzaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         Pizza pizza = pizzaRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        List<Ingredient> ingredients = ingredientRepo.findAll();
         model.addAttribute("pizza", pizza);
+        model.addAttribute("ingredients", ingredients);
         return "/pizzas/edit";
     }
 

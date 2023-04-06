@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pizzas")
@@ -25,6 +26,13 @@ public class Pizza {
 
     @OneToMany(mappedBy = "pizza")
     private List<SpecialOffer> specialOffers;
+
+    @ManyToMany
+    @JoinTable(
+            name = "ingredient_pizza",
+            joinColumns = @JoinColumn(name = "pizza_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> ingredients;
 
     //GETTERS
     public String getName() {
@@ -47,6 +55,10 @@ public class Pizza {
         return specialOffers;
     }
 
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
     //SETTERS
     public void setName(String name) {
         this.name = name;
@@ -66,5 +78,9 @@ public class Pizza {
 
     public void setSpecialOffers(List<SpecialOffer> specialOffers) {
         this.specialOffers = specialOffers;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

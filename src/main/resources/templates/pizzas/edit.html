@@ -12,6 +12,7 @@
 <div class="container py-4">
     <div class="row">
         <form class="col-10" method="POST" th:action="@{|/pizzas/edit/${pizza.id}|}" th:object="${pizza}">
+
             <!--Name-->
             <div class="mb-3">
                 <label for="name" class="form-label">Nome della pizza</label>
@@ -22,6 +23,7 @@
                     </ul>
                 </div>
             </div>
+
             <!--Price-->
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
@@ -32,6 +34,17 @@
                     </ul>
                 </div>
             </div>
+
+            <!--Ingredients-->
+            <div class="mb-3">
+                <div th:each="ingredient : ${ingredients}">
+
+                    <input type="checkbox" th:field="*{ingredients}" th:value="${ingredient.id}" th:id="|ingredient-${ingredient.id}|">
+                    <label th:for="|ingredient-${ingredient.id}|" class="form-label" th:text="${ingredient.name}"></label>
+
+                </div>
+            </div>
+
             <!--Description-->
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
