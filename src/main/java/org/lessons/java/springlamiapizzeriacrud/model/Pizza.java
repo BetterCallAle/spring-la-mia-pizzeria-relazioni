@@ -24,7 +24,7 @@ public class Pizza {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "pizza")
+    @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
     private List<SpecialOffer> specialOffers;
 
     @ManyToMany
