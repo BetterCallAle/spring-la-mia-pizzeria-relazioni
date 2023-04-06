@@ -13,7 +13,7 @@
         <h1 class="text-danger mb-1" th:text="${pizza.name}"></h1>
         <p th:text="${pizza.description}"></p>
         <p th:text="|${pizza.price} €|"></p>
-        <div class="ingredients my-4">
+        <div th:if="${pizza.ingredients.size() > 0}" class="ingredients my-4">
             <h6>INGREDIENTI:</h6>
             <ul class="ingredient-list">
                 <li th:each="ingredient : ${pizza.ingredients}" th:text="${ingredient.name}"></li>

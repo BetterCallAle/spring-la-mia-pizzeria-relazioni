@@ -1,6 +1,7 @@
 package org.lessons.java.springlamiapizzeriacrud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "ingredients")
@@ -8,6 +9,9 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank(message = "Il campo nome non può essere vuoto")
+    @Column(nullable = false)
     private String name;
 
     //GETTER

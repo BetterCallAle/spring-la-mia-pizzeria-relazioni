@@ -74,8 +74,10 @@ public class PizzaController {
 
     //STORE
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
         if(bindingResult.hasErrors()){
+            List<Ingredient> ingredients = ingredientRepo.findAll();
+            model.addAttribute("ingredients", ingredients);
             return "/pizzas/create";
         }
         redirectAttributes.addFlashAttribute("success", "La pizza " + formPizza.getName() + " è stata creata");
@@ -95,8 +97,10 @@ public class PizzaController {
 
     //UPDATE
     @PostMapping("/edit/{id}")
-    public String update(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String update(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
         if(bindingResult.hasErrors()){
+            List<Ingredient> ingredients = ingredientRepo.findAll();
+            model.addAttribute("ingredients", ingredients);
             return "/pizzas/edit";
         }
         redirectAttributes.addFlashAttribute("success", "La pizza " + pizza.getName() + " è stata aggiornata");
